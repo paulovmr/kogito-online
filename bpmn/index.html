@@ -18,14 +18,8 @@
 <html lang="en">
   <head>
     <style>
-      html,
-      body,
-      iframe {
-        margin: 0;
-        border: 0;
-        padding: 0;
-        height: calc(100vh - 40px);
-        width: 100%;
+      #bpmn-editor-container {
+        height: calc(100vh - 50px);
       }
 
       .toolbar {
@@ -56,17 +50,8 @@
     <script>
       const editor = BpmnEditor.open({
         container: document.getElementById("bpmn-editor-container"),
-        initialContent: fetch("onboarding.bpmn").then(content => Promise.resolve(content.text())),
-        readOnly: false,
-        resources: new Map([
-          [
-            "DecisionTasks.wid",
-            {
-              contentType: "text",
-              content: fetch("DecisionTasks.wid").then(content => Promise.resolve(content.text()))
-            }
-          ]
-        ])
+        initialContent: Promise.resolve(""),
+        readOnly: false
       });
 
       document.getElementById("undo").addEventListener("click", () => {
