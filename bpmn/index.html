@@ -50,8 +50,18 @@
     <script>
       const editor = BpmnEditor.open({
         container: document.getElementById("bpmn-editor-container"),
-        initialContent: Promise.resolve(""),
-        readOnly: false
+        initialContent: fetch("onboarding.bpmn").then(content => content.text()),
+        readOnly: false,
+        origin: "*",
+        resources: new Map([
+          [
+            "DecisionTasks.wid",
+            {
+              contentType: "text",
+              content: fetch("DecisionTasks.wid").then(content => content.text())
+            }
+          ]
+        ])
       });
 
       document.getElementById("undo").addEventListener("click", () => {
